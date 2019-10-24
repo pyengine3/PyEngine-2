@@ -12,7 +12,7 @@ import logging
 
 
 class Window:
-    def __init__(self, width, height, color=Color.from_name("black"), title="PyEngine 2", icon=None,
+    def __init__(self, width, height, color=Color.from_name("BLACK"), title="PyEngine 2", icon=None,
                  limit_fps=None, update_rate=60, centered=True, debug=False):
         """
             Create Window

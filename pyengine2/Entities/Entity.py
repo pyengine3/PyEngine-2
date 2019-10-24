@@ -1,4 +1,7 @@
 from pyengine2.Utils import logger
+from pyengine2.Components.ControlComponent import ControlComponent
+
+import pygame.locals as const
 
 
 class Entity:
