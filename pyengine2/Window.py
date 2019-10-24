@@ -14,6 +14,19 @@ import logging
 class Window:
     def __init__(self, width, height, color=Color.from_name("black"), title="PyEngine 2", icon=None,
                  limit_fps=None, update_rate=60, centered=True, debug=False):
+        """
+            Create Window
+
+            :param width: Width of Window
+            :param height: Height of Window
+            :param color: Color of background of Window
+            :param title: Title of Window
+            :param icon: Icon of Window (None if you have any icon)
+            :param limit_fps: Max FPS of Window (None if you don't want limit)
+            :param update_rate: Rate of World's update
+            :param centered: True if you want centered window, else False
+            :param debug: True if you want some debug infos, else False
+        """
         self.update_rate = update_rate
         self.debug = debug
         self.color = color
@@ -47,6 +60,7 @@ class Window:
     def run(self):
         """Run Window"""
         self.is_running = True
+        logger.debug("Start Window")
         while self.is_running:
             for event in pygame.event.get():
                 self.__process_event(event)
@@ -64,6 +78,13 @@ class Window:
         pygame.quit()
 
     def __process_event(self, evt):
+        """
+            Process event
+
+            :param evt: Event to be processed
+
+            .. note:: You may not use this method. Window make it for you.
+        """
         if evt.type == const.QUIT:
             self.stop()
         elif evt.type == const.USEREVENT:
