@@ -6,6 +6,7 @@ import pygame.locals as const
 import os
 
 from pyengine2.Utils.Color import Color
+from pyengine2.World import World
 
 
 class Window:
@@ -28,19 +29,22 @@ class Window:
 
         self.clock = pygame.time.Clock()
         self.is_running = False
-
         self.fps_timer = 30
+        self.world = World(self)
 
     def stop(self):
         self.is_running = False
 
     def run(self):
+        """Run Window"""
         self.is_running = True
         while self.is_running:
             for event in pygame.event.get():
                 self.__process_event(event)
 
             self.screen.fill(self.color.get_rgba())
+
+            self.world.show(self.screen)
 
             if self.limit_fps is None:
                 self.clock.tick()
