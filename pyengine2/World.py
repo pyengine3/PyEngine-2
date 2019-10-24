@@ -12,6 +12,25 @@ class World:
         """
         self.window = window
         self.entity_system = EntitySystem(self)
+        self.dirty_rects = []
+
+    def event(self, evt):
+        """
+            Call event
+
+            :param evt: Event
+
+            .. note:: You may not use this method. Window make it for you
+        """
+        self.entity_system.event(evt)
+
+    def update(self):
+        """
+            Update World
+
+            .. note:: You may not use this method. Window make it for you
+        """
+        self.entity_system.update()
 
     def show(self, screen):
         """

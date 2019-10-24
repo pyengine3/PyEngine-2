@@ -66,3 +66,27 @@ class Entity:
             self.components.remove(self.get_component(tcomponent))
         else:
             logger.warning("Entity doesn't have "+str(tcomponent))
+
+    def event(self, evt):
+        """
+            Call event
+
+            :param evt: Event
+
+            .. note:: You may not use this method. EntitySystem make it for you
+        """
+        if evt.type == const.KEYDOWN:
+            if self.has_component(ControlComponent):
+                self.get_component(ControlComponent).keypress(evt)
+        elif evt.type == const.KEYUP:
+            if self.has_component(ControlComponent):
+                self.get_component(ControlComponent).keyup(evt)
+
+    def update(self):
+        """
+            Update Entity
+
+            .. note:: You may not use this method. EntitySystem make it for you
+        """
+        if self.has_component(ControlComponent):
+            self.get_component(ControlComponent).update()

@@ -90,6 +90,7 @@ class Window:
             self.stop()
         elif evt.type == const.USEREVENT:
             if self.debug:
+                self.world.update()
                 self.fps_timer -= 1
                 if self.fps_timer <= 0:
                     try:
@@ -97,3 +98,5 @@ class Window:
                     except OverflowError:
                         logger.debug("FPS : Infinity")
                     self.fps_timer = 30
+        else:
+            self.world.event(evt)

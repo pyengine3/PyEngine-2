@@ -45,6 +45,27 @@ class EntitySystem:
         """
         return entity in self.entities
 
+    def event(self, evt):
+        """
+            Call event
+
+            :param evt: Event
+
+            .. note:: You may not use this method. World make it for you
+        """
+
+        for i in self.entities:
+            i.event(evt)
+
+    def update(self):
+        """
+            Update EntitySystem
+
+            .. note:: You may not use this method. Window make it for you
+        """
+        for i in self.entities:
+            i.update()
+
     def show(self, screen):
         """
             Show world in screen
