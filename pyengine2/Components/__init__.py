@@ -1,3 +1,4 @@
 from pyengine2.Components.SpriteComponent import SpriteComponent
 from pyengine2.Components.PositionComponent import PositionComponent
 from pyengine2.Components.ShowComponent import ShowComponent
+from pyengine2.Components.ControlComponent import ControlComponent
