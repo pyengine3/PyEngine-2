@@ -7,6 +7,8 @@ import os
 
 from pyengine2.Utils.Color import Color
 from pyengine2.World import World
+from pyengine2.Utils import logger
+import logging
 
 
 class Window:
@@ -32,7 +34,14 @@ class Window:
         self.fps_timer = 30
         self.world = World(self)
 
+        if debug:
+            logger.setLevel(logging.DEBUG)
+        else:
+            logger.setLevel(logging.INFO)
+
     def stop(self):
+        """Stop Window"""
+        logger.debug("Stop Window")
         self.is_running = False
 
     def run(self):
@@ -62,7 +71,7 @@ class Window:
                 self.fps_timer -= 1
                 if self.fps_timer <= 0:
                     try:
-                        print("FPS :", round(self.clock.get_fps()))
+                        logger.debug("FPS : " + str(round(self.clock.get_fps())))
                     except OverflowError:
-                        print("FPS : Infinity")
+                        logger.debug("FPS : Infinity")
                     self.fps_timer = 30
