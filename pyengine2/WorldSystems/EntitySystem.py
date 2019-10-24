@@ -50,9 +50,14 @@ class EntitySystem:
             Show world in screen
 
             :param screen: Screen where world is showed
+            :return: Rects must be updated
 
             .. note:: You may not use this method. World it this for you.
         """
+        dirty_rect = []
         for entity in self.entities:
             if entity.has_component(ShowComponent):
-                entity.get_component(ShowComponent).show(screen)
+                rects = entity.get_component(ShowComponent).show(screen)
+                if len(rects):
+                    dirty_rect.append(*rects)
+        return dirty_rect

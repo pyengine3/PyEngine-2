@@ -21,4 +21,4 @@ class World:
 
             .. note:: You may not use this method. Window make it for you.
         """
-        self.entity_system.show(screen)
+        self.dirty_rects = self.entity_system.show(screen)
