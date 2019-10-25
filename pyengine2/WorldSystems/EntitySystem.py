@@ -81,3 +81,17 @@ class EntitySystem:
                 for i in rect:
                     yield i
 
+    def show_debug(self, screen):
+        """
+            Show debug world in screen
+
+            :param screen: Screen where world is showed
+            :return: Rects must be updated
+
+            .. note:: You may not use this method. World it this for you.
+        """
+        for entity in self.entities:
+            if entity.has_component(ShowComponent):
+                rect = entity.get_component(ShowComponent).show_debug(screen)
+                for i in rect:
+                    yield i

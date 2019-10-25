@@ -67,12 +67,18 @@ class Window:
 
             self.world.show(self.screen)
 
+            if self.debug:
+                self.world.show_debug(self.screen)
             if self.limit_fps is None:
                 self.clock.tick()
             else:
                 self.clock.tick(self.limit_fps)
 
             pygame.display.update(tuple(self.world.dirty_rects))
+
+            if self.debug:
+                pygame.display.update(tuple(self.world.dirty_rects_debug))
+
         pygame.quit()
 
     def __process_event(self, evt):
