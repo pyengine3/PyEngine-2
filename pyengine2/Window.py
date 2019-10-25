@@ -5,9 +5,8 @@ import pygame.locals as const
 
 import os
 
-from pyengine2.Utils.Color import Color
+from pyengine2.Utils import Color, Font, logger
 from pyengine2.World import World
-from pyengine2.Utils import logger
 import logging
 
 
@@ -44,8 +43,14 @@ class Window:
 
         self.clock = pygame.time.Clock()
         self.is_running = False
-        self.fps_timer = 30
+        self.debug_font = Font(bold=True, color=Color.from_name("ORANGE"))
         self.world = World(self)
+
+        self.fps_timer = 30
+        try:
+            self.fps_label = self.debug_font.render("FPS : " + str(round(self.clock.get_fps())))
+        except OverflowError:
+            self.fps_label = self.debug_font.render("FPS : Infinity")
 
         if debug:
             logger.setLevel(logging.DEBUG)
@@ -69,6 +74,10 @@ class Window:
 
             if self.debug:
                 self.world.show_debug(self.screen)
+                self.screen.fill(self.color.get_rgba(),
+                                 pygame.Rect((10, 10), (self.debug_font.rendered_size("FPS : Infinity"))))
+                self.screen.blit(self.fps_label, (10, 10))
+
             if self.limit_fps is None:
                 self.clock.tick()
             else:
@@ -78,6 +87,7 @@ class Window:
 
             if self.debug:
                 pygame.display.update(tuple(self.world.dirty_rects_debug))
+                pygame.display.update(self.fps_label.get_rect(x=10, y=10))
 
         pygame.quit()
 
@@ -97,9 +107,9 @@ class Window:
                 self.fps_timer -= 1
                 if self.fps_timer <= 0:
                     try:
-                        logger.debug("FPS : " + str(round(self.clock.get_fps())))
+                        self.fps_label = self.debug_font.render("FPS : " + str(round(self.clock.get_fps())))
                     except OverflowError:
-                        logger.debug("FPS : Infinity")
+                        self.fps_label = self.debug_font.render("FPS : Infinity")
                     self.fps_timer = 30
         else:
             self.world.event(evt)
