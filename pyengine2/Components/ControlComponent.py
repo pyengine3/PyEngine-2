@@ -6,7 +6,7 @@ import pygame.locals as const
 
 
 class ControlComponent(Component):
-    types = ["FOURDIRECTION"]
+    types = ["FOURDIRECTION", "UPDOWN", "LEFTRIGHT"]
 
     def __init__(self, control_type, speed=5):
         super(ControlComponent, self).__init__()
@@ -33,16 +33,16 @@ class ControlComponent(Component):
 
     def move_by_key(self, key):
         if key == self.controls["UPJUMP"]:
-            if self.control_type == "FOURDIRECTION":
+            if self.control_type in ("FOURDIRECTION", "DOWNUP"):
                 self.entity.get_component(PositionComponent).y -= self.speed
         elif key == self.controls["DOWN"]:
-            if self.control_type == "FOURDIRECTION":
+            if self.control_type in ("FOURDIRECTION", "DOWNUP"):
                 self.entity.get_component(PositionComponent).y += self.speed
         elif key == self.controls["RIGHT"]:
-            if self.control_type == "FOURDIRECTION":
+            if self.control_type in ("FOURDIRECTION", "LEFTRIGHT"):
                 self.entity.get_component(PositionComponent).x += self.speed
         elif key == self.controls["LEFT"]:
-            if self.control_type == "FOURDIRECTION":
+            if self.control_type in ("FOURDIRECTION", "LEFTRIGHT"):
                 self.entity.get_component(PositionComponent).x -= self.speed
 
     def keyup(self, evt):
