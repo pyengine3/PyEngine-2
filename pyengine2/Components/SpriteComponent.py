@@ -1,9 +1,11 @@
 import pygame
 from pyengine2.Components.Component import Component
 
+from pyengine2.Utils import Vec2
+
 
 class SpriteComponent(Component):
-    def __init__(self, sprite):
+    def __init__(self, sprite, rotation=0, size=None, flipx=False, flipy=False):
         """
             Create SpriteComponent
 
@@ -13,4 +15,23 @@ class SpriteComponent(Component):
         """
         super(SpriteComponent, self).__init__()
         self.sprite = sprite
-        self.image = pygame.image.load(sprite)
+        self.image = pygame.image.load(sprite).convert()
+        if size is None:
+            size = Vec2(self.image.get_rect().width, self.image.get_rect().height)
+        self.size = size
+        self.rotation = rotation
+        self.flipx = flipx
+        self.flipy = flipy
+        self.transformed_image = None
+        self.update_image()
+
+    def update_image(self):
+        """
+            Update the transformed image of entity
+
+            .. note:: You must use this method after any change of the component
+        """
+        image = pygame.transform.flip(self.image, self.flipx, self.flipy)
+        image = pygame.transform.scale(image, self.size.coords())
+        image = pygame.transform.rotate(image, self.rotation)
+        self.transformed_image = image
