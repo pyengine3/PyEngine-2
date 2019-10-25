@@ -77,6 +77,7 @@ class EntitySystem:
         """
         for entity in self.entities:
             if entity.has_component(ShowComponent):
-                rects = entity.get_component(ShowComponent).show(screen)
-                if len(rects):
-                    yield rects
+                rect = entity.get_component(ShowComponent).show(screen)
+                for i in rect:
+                    yield i
+

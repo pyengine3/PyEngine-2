@@ -24,12 +24,28 @@ class ShowComponent(Component):
 
             .. note:: You may not use this method. EntitySystem make it for you
         """
-        dirty_rects = []
-        for i in self.entities:
-            x, y = i.get_component(PositionComponent).get_position()
-            image = i.get_component(SpriteComponent).image
-            if self.old_pos is None or self.old_pos != (x, y):
-                self.old_pos = (x, y)
-                screen.blit(image, (x, y))
-                dirty_rects.append(image.get_rect(x=x, y=y))
-        return dirty_rects
+        pos = self.entity.get_component(PositionComponent).position()
+        if self.use_sprite:
+            image = self.entity.get_component(SpriteComponent).transformed_image
+        else:
+            image = self.entity.get_component(TextComponent).render
+        if self.old_pos is None or self.old_pos != pos or self.old_image is None or self.old_image != image:
+            if self.old_pos is not None and self.old_image is not None:
+                dirty_rect = self.old_image.get_rect(x=self.old_pos.x, y=self.old_pos.y)
+                screen.fill(self.entity.system.world.window.color.get_rgba(), dirty_rect)
+            else:
+                dirty_rect = None
+            self.old_pos = pos
+            self.old_image = image
+            image_rect = True
+        else:
+            dirty_rect = None
+            image_rect = False
+
+        screen.blit(image, pos.coords())
+
+        if dirty_rect:
+            yield dirty_rect
+        if image_rect:
+            yield image.get_rect(x=pos.x, y=pos.y)
+

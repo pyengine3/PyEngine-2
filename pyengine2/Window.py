@@ -65,8 +65,6 @@ class Window:
             for event in pygame.event.get():
                 self.__process_event(event)
 
-            self.screen.fill(self.color.get_rgba())
-
             self.world.show(self.screen)
 
             if self.limit_fps is None:
@@ -74,8 +72,7 @@ class Window:
             else:
                 self.clock.tick(self.limit_fps)
 
-            for i in self.world.dirty_rects:
-                pygame.display.update(i)
+            pygame.display.update(tuple(self.world.dirty_rects))
         pygame.quit()
 
     def __process_event(self, evt):
