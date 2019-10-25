@@ -75,7 +75,6 @@ class EntitySystem:
 
             .. note:: You may not use this method. World it this for you.
         """
-        #dirty_rect = []
         for entity in self.entities:
             if entity.has_component(ShowComponent):
                 rects = entity.get_component(ShowComponent).show(screen)

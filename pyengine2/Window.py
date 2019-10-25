@@ -74,8 +74,8 @@ class Window:
             else:
                 self.clock.tick(self.limit_fps)
 
-            if len(self.world.dirty_rects):
-                pygame.display.update(self.world.dirty_rects)
+            for i in self.world.dirty_rects:
+                pygame.display.update(i)
         pygame.quit()
 
     def __process_event(self, evt):
