@@ -1,19 +1,26 @@
 from pyengine2.Components.Component import Component
 from pyengine2.Components.SpriteComponent import SpriteComponent
 from pyengine2.Components.PositionComponent import PositionComponent
+from pyengine2.Components.TextComponent import TextComponent
 
 
 class ShowComponent(Component):
-    def __init__(self):
+    def __init__(self, use_sprite=True):
         """
             Create ShowComponent
 
             This Component is here to add showing of entity
         """
         super(ShowComponent, self).__init__()
-        self.required_components.add(SpriteComponent)
         self.required_components.add(PositionComponent)
+        if use_sprite:
+            self.required_components.add(SpriteComponent)
+        else:
+            self.required_components.add(TextComponent)
+        self.use_sprite = use_sprite
         self.old_pos = None
+        self.old_debug_pos = None
+        self.old_image = None
 
     def show(self, screen):
         """
