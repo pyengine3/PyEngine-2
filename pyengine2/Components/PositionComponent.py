@@ -1,5 +1,6 @@
 from pyengine2.Components.Component import Component
 
+from pyengine2.Utils import Vec2
 
 class PositionComponent(Component):
     def __init__(self, x, y):
@@ -15,13 +16,13 @@ class PositionComponent(Component):
         self.x = x
         self.y = y
 
-    def get_position(self):
+    def position(self):
         """
             Get Position of Component
 
-            :return: Tuple with X and Y Positions
+            :return: Vec2 of Position
         """
-        return self.x, self.y
+        return Vec2(self.x, self.y)
 
     def set_position(self, x, y):
         """
