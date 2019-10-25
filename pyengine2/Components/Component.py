@@ -1,4 +1,4 @@
 class Component:
     def __init__(self):
-        self.entities = set()
+        self.entity = None
         self.required_components = set()

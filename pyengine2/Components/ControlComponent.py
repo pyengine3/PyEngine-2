@@ -34,20 +34,16 @@ class ControlComponent(Component):
     def move_by_key(self, key):
         if key == self.controls["UPJUMP"]:
             if self.control_type == "FOURDIRECTION":
-                for i in self.entities:
-                    i.get_component(PositionComponent).y -= self.speed
+                self.entity.get_component(PositionComponent).y -= self.speed
         elif key == self.controls["DOWN"]:
             if self.control_type == "FOURDIRECTION":
-                for i in self.entities:
-                    i.get_component(PositionComponent).y += self.speed
+                self.entity.get_component(PositionComponent).y += self.speed
         elif key == self.controls["RIGHT"]:
             if self.control_type == "FOURDIRECTION":
-                for i in self.entities:
-                    i.get_component(PositionComponent).x += self.speed
+                self.entity.get_component(PositionComponent).x += self.speed
         elif key == self.controls["LEFT"]:
             if self.control_type == "FOURDIRECTION":
-                for i in self.entities:
-                    i.get_component(PositionComponent).x -= self.speed
+                self.entity.get_component(PositionComponent).x -= self.speed
 
     def keyup(self, evt):
         if evt.key in self.keypressed:
