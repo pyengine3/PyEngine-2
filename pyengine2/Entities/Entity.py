@@ -13,6 +13,7 @@ class Entity:
         """
         self.components = set()
         self.system = None
+        self.identity = None
 
     def add_component(self, component):
         """
@@ -28,7 +29,7 @@ class Entity:
                 if i not in set(type(c) for c in self.components):
                     logger.warning(str(component.__class__.__name__) + " require " + str(i.__name__))
                     return
-            component.entities.add(self)
+            component.entity = self
             self.components.add(component)
             return component
 
