@@ -13,8 +13,8 @@ e = Entity()
 
 e.add_component(ShowComponent())  # Doesn't work because Required Components are not added
 
-e.add_component(PositionComponent(10, 10))
-e.add_component(SpriteComponent(images[0], size=Vec2(50, 50), rotation=45))
+e.add_component(PositionComponent(0, 0))
+e.add_component(SpriteComponent(images[0], size=Vec2(78, 50), rotation=45))
 e.add_component(ShowComponent())
 e.add_component(ControlComponent("FOURDIRECTION"))
 
