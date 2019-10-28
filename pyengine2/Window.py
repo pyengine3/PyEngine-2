@@ -83,11 +83,11 @@ class Window:
             else:
                 self.clock.tick(self.limit_fps)
 
-            pygame.display.update(tuple(self.world.dirty_rects))
-
             if self.debug:
-                pygame.display.update(tuple(self.world.dirty_rects_debug))
                 pygame.display.update(self.fps_label.get_rect(x=10, y=10))
+                pygame.display.update(tuple(self.world.dirty_rects_debug))
+
+            pygame.display.update(tuple(self.world.dirty_rects))
 
         pygame.quit()
 
