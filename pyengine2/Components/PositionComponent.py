@@ -2,6 +2,7 @@ from pyengine2.Components.Component import Component
 
 from pyengine2.Utils import Vec2
 
+
 class PositionComponent(Component):
     def __init__(self, x, y):
         """
