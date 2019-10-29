@@ -6,8 +6,8 @@ from pyengine2.Utils import Vec2
 import os
 
 
-def collision(other_entity):
-    print("COLLISION")
+def collision(other_entity, cause):
+    print("COLLISION :\n  - Entity :", other_entity.identity, "\n  - Cause :", cause)
 
 
 images = [os.path.join(os.path.dirname(__file__), "sprite0.png")]
