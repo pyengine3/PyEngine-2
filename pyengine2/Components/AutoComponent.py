@@ -1,6 +1,7 @@
 from pyengine2.Components.Component import Component
 from pyengine2.Components.PositionComponent import PositionComponent
 from pyengine2.Components.SpriteComponent import SpriteComponent
+from pyengine2.Components.CollisionComponent import CollisionComponent
 
 from pyengine2.Utils import Vec2
 
@@ -29,8 +30,16 @@ class AutoComponent(Component):
             .. note:: You may not use this method. Entity make it for you
         """
         if self.movement != Vec2.zero():
-            self.entity.get_component(PositionComponent).x += self.movement.x
-            self.entity.get_component(PositionComponent).y += self.movement.y
+            pos = self.entity.get_component(PositionComponent).position()
+            pos.x += self.movement.x
+            pos.y += self.movement.y
+
+            if self.entity.has_component(CollisionComponent):
+                if self.entity.get_component(CollisionComponent).can_go(pos.x, pos.y, "AUTOCOMPONENT"):
+                    self.entity.get_component(PositionComponent).set_position(pos.x, pos.y)
+            else:
+                self.entity.get_component(PositionComponent).set_position(pos.x, pos.y)
+
         if self.rotation != 0:
             self.entity.get_component(SpriteComponent).rotation += self.rotation
             self.entity.get_component(SpriteComponent).update_image()
