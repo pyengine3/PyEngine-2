@@ -14,7 +14,6 @@ class SpriteComponent(Component):
             :param sprite: Path to file of sprite
         """
         super(SpriteComponent, self).__init__()
-        self.sprite = sprite
         self.image = pygame.image.load(sprite).convert()
         if size is None:
             size = Vec2(self.image.get_rect().width, self.image.get_rect().height)

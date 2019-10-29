@@ -36,7 +36,7 @@ class ShowComponent(Component):
             image = self.entity.get_component(SpriteComponent).transformed_image
         else:
             image = self.entity.get_component(TextComponent).render
-        if self.old_pos is None or self.old_pos != pos or self.old_image is None or self.old_image != image:
+        if self.old_pos != pos or self.old_image != image:
             if self.old_pos is not None and self.old_image is not None:
                 dirty_rect = self.old_image.get_rect(x=self.old_pos.x, y=self.old_pos.y)
                 screen.fill(self.entity.system.world.window.color.get_rgba(), dirty_rect)
