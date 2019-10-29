@@ -12,8 +12,8 @@ class World:
         """
         self.window = window
         self.entity_system = EntitySystem(self)
+        self.ui_system = UISystem(self)
         self.dirty_rects = []
-        self.dirty_rects_debug = []
 
     def event(self, evt):
         """
@@ -41,7 +41,8 @@ class World:
 
             .. note:: You may not use this method. Window make it for you.
         """
-        self.dirty_rects = self.entity_system.show(screen)
+        self.dirty_rects.append(self.entity_system.show(screen))
+        self.dirty_rects.append(self.ui_system.show(screen))
 
     def show_debug(self, screen):
         """
@@ -51,4 +52,5 @@ class World:
 
             .. note:: You may not use this method. Window make it for you.
         """
-        self.dirty_rects_debug = self.entity_system.show_debug(screen)
+        self.dirty_rects.append(self.entity_system.show_debug(screen))
+        self.dirty_rects.append(self.ui_system.show_debug(screen))

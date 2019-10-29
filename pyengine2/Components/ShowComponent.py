@@ -66,8 +66,8 @@ class ShowComponent(Component):
             .. note:: You may not use this method. EntitySystem make it for you
         """
         pos = self.entity.get_component(PositionComponent).position()
-        image = self.entity.system.world.window.debug_font.render("ID : "+str(self.entity.identity))
-        if self.old_debug_pos is None or self.old_debug_pos != pos:
+        image = self.entity.system.debug_font.render("ID : "+str(self.entity.identity))
+        if self.old_debug_pos != pos:
             if self.old_debug_pos is not None:
                 dirty_rect = image.get_rect(x=self.old_debug_pos.x, y=self.old_debug_pos.y - 20)
                 screen.fill(self.entity.system.world.window.color.get_rgba(), dirty_rect)

@@ -74,6 +74,7 @@ class Window:
             for event in pygame.event.get():
                 self.process_event(event)
 
+            self.world.dirty_rects = []
             self.world.show(self.screen)
 
             if self.debug:
@@ -89,9 +90,9 @@ class Window:
 
             if self.debug:
                 pygame.display.update(self.fps_label.get_rect(x=10, y=10))
-                pygame.display.update(tuple(self.world.dirty_rects_debug))
 
-            pygame.display.update(tuple(self.world.dirty_rects))
+            for dirty_rect in self.world.dirty_rects:
+                pygame.display.update(tuple(dirty_rect))
 
         pygame.quit()
 

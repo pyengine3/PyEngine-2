@@ -1,5 +1,5 @@
 from pyengine2.Components.ShowComponent import ShowComponent
-from pyengine2.Utils import logger
+from pyengine2.Utils import logger, Font, Color
 
 
 class EntitySystem:
@@ -13,6 +13,7 @@ class EntitySystem:
         """
         self.world = world
         self.entities = []
+        self.debug_font = Font(bold=True, color=Color.from_name("BLUE"))
 
     def add_entity(self, entity):
         """
