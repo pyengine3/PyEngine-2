@@ -7,6 +7,7 @@ import os
 
 from pyengine2.Utils import Color, Font, logger
 from pyengine2.World import World
+from pyengine2.WindowSystems import MusicSystem
 import logging
 
 
@@ -46,6 +47,8 @@ class Window:
         self.debug_font = Font(bold=True, color=Color.from_name("ORANGE"))
         self.world = World(self)
 
+        self.music_system = MusicSystem()
+
         self.fps_timer = 30
         try:
             self.fps_label = self.debug_font.render("FPS : " + str(round(self.clock.get_fps())))
@@ -66,9 +69,10 @@ class Window:
         """Run Window"""
         self.is_running = True
         logger.debug("Start Window")
+        self.screen.fill(self.color.get_rgba())
         while self.is_running:
             for event in pygame.event.get():
-                self.__process_event(event)
+                self.process_event(event)
 
             self.world.show(self.screen)
 
@@ -91,7 +95,7 @@ class Window:
 
         pygame.quit()
 
-    def __process_event(self, evt):
+    def process_event(self, evt):
         """
             Process event
 
@@ -111,5 +115,7 @@ class Window:
                     except OverflowError:
                         self.fps_label = self.debug_font.render("FPS : Infinity")
                     self.fps_timer = 30
+        elif evt.type == self.music_system.ENDSOUND:
+            self.music_system.next_song()
         else:
             self.world.event(evt)
