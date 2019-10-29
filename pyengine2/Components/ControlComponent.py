@@ -10,6 +10,12 @@ class ControlComponent(Component):
     types = ["FOURDIRECTION", "UPDOWN", "LEFTRIGHT"]
 
     def __init__(self, control_type, speed=5):
+        """
+            Create ControlComponent
+
+            :param control_type: Type of control ("FOURDIRECTION", "UPDOWN", "LEFTRIGHT")
+            :param speed: Speed of movement
+        """
         super(ControlComponent, self).__init__()
         self.control_type = control_type
         if self.control_type not in ControlComponent.types:
@@ -29,10 +35,20 @@ class ControlComponent(Component):
         self.required_components.add(PositionComponent)
 
     def update(self):
+        """
+            Update ControlComponent
+
+            .. note:: You may not this method. Entity make it for you
+        """
         for i in self.keypressed:
             self.move_by_key(i)
 
     def move_by_key(self, key):
+        """
+            Move Entity by key pressed
+
+            .. note:: You may not this method. ControlComponent make it for you
+        """
         pos = self.entity.get_component(PositionComponent).position()
         cause = "UNKNOWN"
         if key == self.controls["UPJUMP"]:
@@ -59,9 +75,19 @@ class ControlComponent(Component):
             self.entity.get_component(PositionComponent).set_position(pos.x, pos.y)
 
     def keyup(self, evt):
+        """
+            Event KEYUP
+
+            .. note:: You may not this method. Entity make it for you
+        """
         if evt.key in self.keypressed:
             self.keypressed.remove(evt.key)
 
     def keypress(self, evt):
+        """
+            Event KEYDOWN
+
+            .. note:: You may not this method. Entity make it for you
+        """
         if evt.key not in self.keypressed:
             self.keypressed.add(evt.key)
