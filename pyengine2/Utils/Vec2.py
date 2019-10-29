@@ -82,7 +82,7 @@ class Vec2:
         return "Vec2" + str((self.x, self.y))
 
     def __eq__(self, other):
-        return self.x == other.x and self.y == other.y
+        return other is not None and self.x == other.x and self.y == other.y
 
     def __neg__(self):
         return Vec2(-self.x, -self.y)
