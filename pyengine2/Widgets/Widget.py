@@ -13,6 +13,14 @@ class Widget:
     def event(self, evt):
         pass
 
+    def update(self):
+        """
+            Update Widget
+
+            .. note:: You may not use this method. UISystem make it for you
+        """
+        pass
+
     def show(self, screen):
         pass
 

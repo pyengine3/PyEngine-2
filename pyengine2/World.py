@@ -25,6 +25,7 @@ class World:
             .. note:: You may not use this method. Window make it for you
         """
         self.entity_system.event(evt)
+        self.ui_system.event(evt)
 
     def update(self):
         """
@@ -33,6 +34,7 @@ class World:
             .. note:: You may not use this method. Window make it for you
         """
         self.entity_system.update()
+        self.ui_system.update()
 
     def show(self, screen):
         """
