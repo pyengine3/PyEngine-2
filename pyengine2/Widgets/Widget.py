@@ -3,6 +3,14 @@ from pyengine2.Utils import Vec2
 
 class Widget:
     def __init__(self, x, y):
+        """
+            Create Widget
+
+            :param x: X Pos
+            :param y: Y Pos
+
+            .. note:: You may not use this constructor. Widget isn't util
+        """
         self.x = x
         self.y = y
         self.identity = None
@@ -11,6 +19,13 @@ class Widget:
         self.old_debug_pos = None
 
     def event(self, evt):
+        """
+            Manage Event
+
+            :param evt: Event triggered
+
+            .. note:: You may not use this method. UISystem make it for you
+        """
         pass
 
     def update(self):
@@ -22,11 +37,19 @@ class Widget:
         pass
 
     def show(self, screen):
+        """
+            Show Widget to screen
+
+            :param screen: Screen where widget must be showed
+            :return: Rects must be updated
+
+            .. note:: You may not use this method. UISystem make it for you
+        """
         pass
 
     def show_debug(self, screen):
         """
-            Show debug entity to screen
+            Show debug widget to screen
 
             :param screen: Screen where entity is showed
             :return: Rects must be updated
