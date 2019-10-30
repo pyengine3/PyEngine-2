@@ -28,6 +28,7 @@ class Button(Widget):
         self.ishover = False
         self.render = None
         self.old_render = None
+        self.old_pos = None
         self.update_render()
 
     def update_render(self):
@@ -57,10 +58,16 @@ class Button(Widget):
 
             .. note:: You may not use this method. UISystem make it for you
         """
-        screen.blit(self.render, (self.x, self.y))
-        if self.old_render != self.render:
+        if self.old_render != self.render or self.old_pos != Vec2(self.x, self.y):
+            if self.old_render is not None and self.old_pos is not None:
+                screen.fill(self.system.world.window.color.get_rgba(), self.old_render.get_rect(x=self.old_pos.x,
+                                                                                                y=self.old_pos.y))
+            screen.blit(self.render, (self.x, self.y))
             self.old_render = self.render
+            self.old_pos = Vec2(self.x, self.y)
             yield self.render.get_rect(x=self.x, y=self.y)
+        else:
+            screen.blit(self.render, (self.x, self.y))
 
     def event(self, evt):
         """

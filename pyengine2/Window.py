@@ -54,6 +54,7 @@ class Window:
             self.fps_label = self.debug_font.render("FPS : " + str(round(self.clock.get_fps())))
         except OverflowError:
             self.fps_label = self.debug_font.render("FPS : Infinity")
+        self.old_fps = None
 
         if debug:
             logger.setLevel(logging.DEBUG)
@@ -79,8 +80,8 @@ class Window:
 
             if self.debug:
                 self.world.show_debug(self.screen)
-                self.screen.fill(self.color.get_rgba(),
-                                 pygame.Rect((10, 10), (self.debug_font.rendered_size("FPS : Infinity"))))
+                if self.old_fps != self.fps_label and self.old_fps is not None:
+                    self.screen.fill(self.color.get_rgba(), self.old_fps.get_rect(x=10, y=10))
                 self.screen.blit(self.fps_label, (10, 10))
 
             if self.limit_fps is None:
@@ -88,7 +89,8 @@ class Window:
             else:
                 self.clock.tick(self.limit_fps)
 
-            if self.debug:
+            if self.debug and self.old_fps != self.fps_label:
+                self.old_fps = self.fps_label
                 pygame.display.update(self.fps_label.get_rect(x=10, y=10))
 
             for dirty_rect in self.world.dirty_rects:
