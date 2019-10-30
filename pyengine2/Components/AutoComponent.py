@@ -11,6 +11,10 @@ class AutoComponent(Component):
         """
             Create AutoComponent
 
+            This Component is here to add auto movement (direction, rotation) to entity
+            Required Components : If movement != Vec2.zero() PositionComponent
+                                  If rotation != 0 SpriteComponent
+
             :param movement: Vector of Automatic Movement
             :param rotation: Number of Automatic Rotation
         """

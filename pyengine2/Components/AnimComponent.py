@@ -9,6 +9,9 @@ class AnimComponent(Component):
         """
             Create AnimComponent
 
+            This Component is here to create animation for entity
+            Required Components : SpriteComponent
+
             :param time: Time in number of update between changement of sprite
             :param images: Path to sprites
         """

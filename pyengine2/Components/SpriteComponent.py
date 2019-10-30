@@ -10,6 +10,7 @@ class SpriteComponent(Component):
             Create SpriteComponent
 
             This Component is here to add sprite to entity
+            Required Components : /
 
             :param sprite: Path to file of sprite
         """

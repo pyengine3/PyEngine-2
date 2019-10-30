@@ -10,6 +10,7 @@ class ShowComponent(Component):
             Create ShowComponent
 
             This Component is here to add showing of entity
+            Required Components : PositionComponent, (SpriteComponent or TextComponent)
         """
         super(ShowComponent, self).__init__()
         self.required_components.add(PositionComponent)

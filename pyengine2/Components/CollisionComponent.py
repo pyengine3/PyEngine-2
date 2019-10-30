@@ -10,6 +10,9 @@ class CollisionComponent(Component):
         """
             Create CollisionComponent
 
+            This Component is here to add collision to entity
+            Required Components : PositionComponent, SpriteComponent
+
             :param callback: Function will be trigger when there is collision
             :param solid: True if Entity is solid or not
         """

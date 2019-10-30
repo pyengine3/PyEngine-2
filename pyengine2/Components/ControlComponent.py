@@ -13,6 +13,9 @@ class ControlComponent(Component):
         """
             Create ControlComponent
 
+            This Component is here to make player control entity
+            Required Components : PositionComponent
+
             :param control_type: Type of control ("FOURDIRECTION", "UPDOWN", "LEFTRIGHT")
             :param speed: Speed of movement
         """

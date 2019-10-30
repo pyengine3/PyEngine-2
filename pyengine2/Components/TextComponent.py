@@ -7,6 +7,9 @@ class TextComponent(Component):
         """
             Create TextComponent
 
+            This Component is here to add text to entity
+            Required Components : /
+
             :param text: Text of Component
             :param font: Font of Component
         """

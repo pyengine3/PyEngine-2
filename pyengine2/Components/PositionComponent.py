@@ -9,6 +9,7 @@ class PositionComponent(Component):
             Create PositionComponent
 
             This Component is here to add position to entity
+            Required Components : /
 
             :param x: Position X
             :param y: Position Y
