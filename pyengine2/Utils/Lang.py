@@ -40,12 +40,13 @@ class Lang:
         else:
             logger.error("Lang file doesn't exist")
 
-    def get_translate(self, key, default):
+    def get_translate(self, key, default, *args):
         """
             Get translate of key
 
             :param key: Key of translation
             :param default: Default value of translation
+            :param args: Args to format translation
             :return: Translation
         """
-        return self.dic.get(key, default)
+        return self.dic.get(key, default).format(*args)
