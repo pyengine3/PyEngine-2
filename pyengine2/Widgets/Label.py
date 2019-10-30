@@ -1,5 +1,5 @@
 from pyengine2.Widgets.Widget import Widget
-from pyengine2.Utils import Font
+from pyengine2.Utils import Font, logger
 
 
 class Label(Widget):
@@ -17,6 +17,27 @@ class Label(Widget):
         self.font = font
         self.render = self.font.render(text)
         self.old_render = None
+
+    @property
+    def text(self):
+        """
+            Get text of Label
+
+            :return: Text of Label
+        """
+        return self.__text
+
+    @text.setter
+    def text(self, text):
+        """
+            Set text of Label
+
+            :param text: Text
+        """
+        self.__text = text
+
+        if "\n" in text:
+            logger.warning("Label doesn't support multiline. Use MultilineLabel")
 
     def update_render(self):
         """
