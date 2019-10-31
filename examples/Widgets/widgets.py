@@ -13,6 +13,7 @@ game = Window(750, 500, debug=True)
 l = Label(100, 100, "Label")
 b = Button(200, 200, "Button", lambda: print("BUTTON CLICKED"))
 c = Checkbox(300, 300, "checkbox", scale=2)
+i = Image(100, 200, "sprite0.png", Vec2(20, 20))
 
 e = Entity()
 
@@ -24,6 +25,7 @@ e.add_component(ControlComponent("FOURDIRECTION"))
 game.world.ui_system.add_widget(l)
 game.world.ui_system.add_widget(b)
 game.world.ui_system.add_widget(c)
+game.world.ui_system.add_widget(i)
 game.world.entity_system.add_entity(e)
 
 game.run()
