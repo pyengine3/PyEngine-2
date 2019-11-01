@@ -71,11 +71,12 @@ class ControlComponent(Component):
                 pos.x -= self.speed
                 cause = "LEFTCONTROL"
 
-        if self.entity.has_component(CollisionComponent):
-            if self.entity.get_component(CollisionComponent).can_go(pos.x, pos.y, cause):
+        if pos != self.entity.get_component(PositionComponent).position():
+            if self.entity.has_component(CollisionComponent):
+                if self.entity.get_component(CollisionComponent).can_go(pos.x, pos.y, cause):
+                    self.entity.get_component(PositionComponent).set_position(pos.x, pos.y)
+            else:
                 self.entity.get_component(PositionComponent).set_position(pos.x, pos.y)
-        else:
-            self.entity.get_component(PositionComponent).set_position(pos.x, pos.y)
 
     def keyup(self, evt):
         """

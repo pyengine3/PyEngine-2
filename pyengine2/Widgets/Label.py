@@ -58,7 +58,7 @@ class Label(Widget):
             .. note:: You may not use this method. UISystem make it for you
         """
         if self.old_render != self.render or self.old_pos != Vec2(self.x, self.y):
-            if self.old_render is not None and self.old_pos is not None:
+            if self.old_render is not None:
                 screen.fill(self.system.world.window.color.get_rgba(), self.old_render.get_rect(x=self.old_pos.x,
                                                                                                 y=self.old_pos.y))
             screen.blit(self.render, (self.x, self.y))

@@ -6,6 +6,14 @@ import pygame
 
 class Image(Widget):
     def __init__(self, x, y, sprite, size=None):
+        """
+            Create Image
+
+            :param x: X Pos
+            :param y: Y Pos
+            :param sprite: Path of image
+            :param size: Size of image or None
+        """
         super(Image, self).__init__(x, y)
 
         self.sprite = sprite
