@@ -6,12 +6,17 @@ from pyengine2.Utils import Vec2
 
 import os
 
+
+def label_management():
+    l.showed = not l.showed
+
+
 images = [os.path.join(os.path.dirname(__file__), "sprite0.png")]
 
 game = Window(750, 500, debug=True)
 
 l = Label(100, 100, "Label")
-b = Button(200, 200, "Button", lambda: print("BUTTON CLICKED"))
+b = Button(200, 200, "Button", label_management)
 c = Checkbox(300, 300, "checkbox", scale=2)
 i = Image(100, 200, "sprite0.png", Vec2(20, 20))
 

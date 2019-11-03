@@ -58,16 +58,17 @@ class Button(Widget):
 
             .. note:: You may not use this method. UISystem make it for you
         """
-        if self.old_render != self.render or self.old_pos != Vec2(self.x, self.y):
-            if self.old_render is not None and self.old_pos is not None:
-                screen.fill(self.system.world.window.color.get_rgba(), self.old_render.get_rect(x=self.old_pos.x,
-                                                                                                y=self.old_pos.y))
-            screen.blit(self.render, (self.x, self.y))
-            self.old_render = self.render
-            self.old_pos = Vec2(self.x, self.y)
-            yield self.render.get_rect(x=self.x, y=self.y)
-        else:
-            screen.blit(self.render, (self.x, self.y))
+        if self.showed:
+            if self.old_render != self.render or self.old_pos != Vec2(self.x, self.y):
+                if self.old_render is not None and self.old_pos is not None:
+                    screen.fill(self.system.world.window.color.get_rgba(), self.old_render.get_rect(x=self.old_pos.x,
+                                                                                                    y=self.old_pos.y))
+                screen.blit(self.render, (self.x, self.y))
+                self.old_render = self.render
+                self.old_pos = Vec2(self.x, self.y)
+                yield self.render.get_rect(x=self.x, y=self.y)
+            else:
+                screen.blit(self.render, (self.x, self.y))
 
     def event(self, evt):
         """
@@ -77,34 +78,35 @@ class Button(Widget):
 
             .. note:: You may not use this method. UISystem make it for you
         """
-        if evt.type == const.MOUSEBUTTONDOWN:
-            if evt.button == const.BUTTON_LEFT:
+        if self.showed:
+            if evt.type == const.MOUSEBUTTONDOWN:
+                if evt.button == const.BUTTON_LEFT:
+                    if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
+                        self.command()
+            elif evt.type == const.MOUSEMOTION:
                 if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
-                    self.command()
-        elif evt.type == const.MOUSEMOTION:
-            if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
-                if not self.ishover:
+                    if not self.ishover:
+                        t = pygame.surfarray.array3d(self.render)
+                        for l in range(len(t)):
+                            for c in range(len(t[l])):
+                                for p in range(3):
+                                    t[l, c, p] = clamp(t[l, c, p]+20, 0, 255)
+                        try:
+                            pygame.surfarray.blit_array(self.render, t)
+                        except ValueError:
+                            pass
+                        self.ishover = True
+                elif self.ishover:
                     t = pygame.surfarray.array3d(self.render)
                     for l in range(len(t)):
                         for c in range(len(t[l])):
                             for p in range(3):
-                                t[l, c, p] = clamp(t[l, c, p]+20, 0, 255)
+                                t[l, c, p] = clamp(t[l, c, p]-20, 0, 255)
                     try:
                         pygame.surfarray.blit_array(self.render, t)
                     except ValueError:
                         pass
-                    self.ishover = True
-            elif self.ishover:
-                t = pygame.surfarray.array3d(self.render)
-                for l in range(len(t)):
-                    for c in range(len(t[l])):
-                        for p in range(3):
-                            t[l, c, p] = clamp(t[l, c, p]-20, 0, 255)
-                try:
-                    pygame.surfarray.blit_array(self.render, t)
-                except ValueError:
-                    pass
-                self.ishover = False
+                    self.ishover = False
 
 
 

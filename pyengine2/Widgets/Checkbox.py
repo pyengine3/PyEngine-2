@@ -67,32 +67,32 @@ class Checkbox(Widget):
 
             .. note:: You may not use this method. UISystem make it for you
         """
-        pos = Vec2(self.x, self.y)
-        if self.old_render_btn != self.render_btn or self.old_pos != pos or self.old_render_label != self.render_label:
-            if self.old_render_btn != self.render_btn or self.old_pos != pos:
-                if self.old_render_btn is not None:
-                    screen.fill(self.system.world.window.color.get_rgba(), self.old_render_btn.get_rect(x=self.old_pos.x,
-                                                                                                        y=self.old_pos.y))
+        if self.showed:
+            pos = Vec2(self.x, self.y)
+            if self.old_render_btn != self.render_btn or self.old_pos != pos or self.old_render_label != self.render_label:
+                if self.old_render_btn != self.render_btn or self.old_pos != pos:
+                    if self.old_render_btn is not None:
+                        screen.fill(self.system.world.window.color.get_rgba(), self.old_render_btn.get_rect(x=self.old_pos.x,
+                                                                                                            y=self.old_pos.y))
+                    screen.blit(self.render_btn, (self.x, self.y))
+                    self.old_render_btn = self.render_btn
+                    self.old_pos = Vec2(self.x, self.y)
+                    yield self.render_btn.get_rect(x=self.x, y=self.y)
+                if self.old_render_label != self.render_label or self.old_pos != pos:
+                    if self.old_render_label is not None:
+                        screen.fill(
+                            self.system.world.window.color.get_rgba(),
+                            self.old_render_label.get_rect(x=self.old_pos.x + 20*self.scale + 5,
+                                                           y=self.y + 20*self.scale / 2 - self.render_label.get_height() / 2))
+                    screen.blit(self.render_label, (self.x + 20*self.scale + 5,
+                                                    self.y + 20*self.scale / 2 - self.render_label.get_height() / 2))
+                    self.old_render_label = self.render_label
+                    yield self.render_label.get_rect(x=self.x + 20*self.scale + 5,
+                                                     y=self.y + 20*self.scale / 2 - self.render_label.get_height() / 2)
+            else:
                 screen.blit(self.render_btn, (self.x, self.y))
-                self.old_render_btn = self.render_btn
-                self.old_pos = Vec2(self.x, self.y)
-                yield self.render_btn.get_rect(x=self.x, y=self.y)
-            if self.old_render_label != self.render_label or self.old_pos != pos:
-                print("UPDATE LABEL")
-                if self.old_render_label is not None:
-                    screen.fill(
-                        self.system.world.window.color.get_rgba(),
-                        self.old_render_label.get_rect(x=self.old_pos.x + 20*self.scale + 5,
-                                                       y=self.y + 20*self.scale / 2 - self.render_label.get_height() / 2))
                 screen.blit(self.render_label, (self.x + 20*self.scale + 5,
                                                 self.y + 20*self.scale / 2 - self.render_label.get_height() / 2))
-                self.old_render_label = self.render_label
-                yield self.render_label.get_rect(x=self.x + 20*self.scale + 5,
-                                                 y=self.y + 20*self.scale / 2 - self.render_label.get_height() / 2)
-        else:
-            screen.blit(self.render_btn, (self.x, self.y))
-            screen.blit(self.render_label, (self.x + 20*self.scale + 5,
-                                            self.y + 20*self.scale / 2 - self.render_label.get_height() / 2))
 
     def event(self, evt):
         """
@@ -102,8 +102,7 @@ class Checkbox(Widget):
 
             .. note:: You may not use this method. UISystem make it for you
         """
-        if evt.type == const.MOUSEBUTTONDOWN:
-            if evt.button == const.BUTTON_LEFT:
-                if self.render_btn.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
-                    self.checked = not self.checked
-                    self.update_render_btn()
+        if self.showed and evt.type == const.MOUSEBUTTONDOWN and evt.button == const.BUTTON_LEFT:
+            if self.render_btn.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
+                self.checked = not self.checked
+                self.update_render_btn()
