@@ -9,6 +9,7 @@ import os
 
 def label_management():
     l.showed = not l.showed
+    c.active = not c.active
 
 
 images = [os.path.join(os.path.dirname(__file__), "sprite0.png")]
