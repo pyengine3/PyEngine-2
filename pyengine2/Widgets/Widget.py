@@ -16,6 +16,7 @@ class Widget:
         self.identity = None
         self.system = None
         self.showed = True
+        self.active = True
         self.old_debug_pos = None
 
     def event(self, evt):

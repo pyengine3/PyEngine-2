@@ -102,7 +102,7 @@ class Checkbox(Widget):
 
             .. note:: You may not use this method. UISystem make it for you
         """
-        if self.showed and evt.type == const.MOUSEBUTTONDOWN and evt.button == const.BUTTON_LEFT:
+        if self.showed and self.active and evt.type == const.MOUSEBUTTONDOWN and evt.button == const.BUTTON_LEFT:
             if self.render_btn.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
                 self.checked = not self.checked
                 self.update_render_btn()
