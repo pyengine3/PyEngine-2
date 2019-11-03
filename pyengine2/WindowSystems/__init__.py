@@ -1,1 +1,2 @@
 from pyengine2.WindowSystems.MusicSystem import MusicSystem
+from pyengine2.WindowSystems.SoundSystem import SoundSystem

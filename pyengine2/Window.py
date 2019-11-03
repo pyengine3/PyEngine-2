@@ -7,7 +7,7 @@ import os
 
 from pyengine2.Utils import Color, Font, logger
 from pyengine2.World import World
-from pyengine2.WindowSystems import MusicSystem
+from pyengine2.WindowSystems import MusicSystem, SoundSystem
 import logging
 
 
@@ -48,6 +48,7 @@ class Window:
         self.world = World(self)
 
         self.music_system = MusicSystem()
+        self.sound_system = SoundSystem()
 
         self.fps_timer = 30
         try:
