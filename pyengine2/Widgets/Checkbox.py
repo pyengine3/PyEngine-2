@@ -60,7 +60,7 @@ class Checkbox(Widget):
 
     def show(self, screen):
         """
-            Show Button to screen
+            Show Checkbox to screen
 
             :param screen: Screen where widget must be showed
             :return: Rects must be updated
