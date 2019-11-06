@@ -20,6 +20,7 @@ l = Label(100, 100, "Label")
 b = Button(200, 200, "Button", label_management)
 c = Checkbox(300, 300, "checkbox", scale=2)
 i = Image(100, 200, "sprite0.png", Vec2(20, 20))
+en = Entry(100, 300)
 
 e = Entity()
 
@@ -32,6 +33,7 @@ game.world.ui_system.add_widget(l)
 game.world.ui_system.add_widget(b)
 game.world.ui_system.add_widget(c)
 game.world.ui_system.add_widget(i)
+game.world.ui_system.add_widget(en)
 game.world.entity_system.add_entity(e)
 
 game.run()
