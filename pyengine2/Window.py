@@ -48,6 +48,7 @@ class Window:
         self.is_running = False
         self.debug_font = Font(bold=True, color=Color.from_name("ORANGE"))
         self.world = World(self)
+        self.old_world = None
 
         self.music_system = MusicSystem()
         self.sound_system = SoundSystem()
@@ -73,10 +74,13 @@ class Window:
         """Run Window"""
         self.is_running = True
         logger.debug("Start Window")
-        self.screen.fill(self.color.get_rgba())
         while self.is_running:
             for event in pygame.event.get():
                 self.process_event(event)
+
+            if self.old_world != self.world:
+                self.screen.fill(self.color.get_rgba())
+                self.old_world = self.world
 
             self.world.dirty_rects = []
             self.world.show(self.screen)
