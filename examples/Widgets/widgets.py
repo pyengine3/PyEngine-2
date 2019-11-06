@@ -2,7 +2,7 @@ from pyengine2 import Window
 from pyengine2.Entities import Entity
 from pyengine2.Components import PositionComponent, SpriteComponent, ShowComponent, ControlComponent
 from pyengine2.Widgets import *
-from pyengine2.Utils import Vec2
+from pyengine2.Utils import Vec2, Font, Color
 
 import os
 
@@ -20,7 +20,7 @@ l = Label(100, 100, "Label")
 b = Button(200, 200, "Button", label_management)
 c = Checkbox(300, 300, "checkbox", scale=2)
 i = Image(100, 200, "sprite0.png", Vec2(20, 20))
-en = Entry(100, 300)
+en = Entry(100, 300, font=Font(size=20, color=Color.from_name("BLACK")))
 
 e = Entity()
 
