@@ -1,4 +1,4 @@
-__version__ = "1.0.0"
+__version__ = "INDEV"
 
 try:
     from pyengine2.Window import Window
