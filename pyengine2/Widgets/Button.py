@@ -58,10 +58,9 @@ class Button(Widget):
             .. note:: You may not use this method. UISystem make it for you
         """
         if self.showed and self.active:
-            if evt.type == const.MOUSEBUTTONDOWN:
-                if evt.button == const.BUTTON_LEFT:
-                    if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
-                        self.command()
+            if evt.type == const.MOUSEBUTTONDOWN and evt.button == const.BUTTON_LEFT:
+                if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
+                    self.command()
             elif evt.type == const.MOUSEMOTION:
                 if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
                     if not self.ishover:
