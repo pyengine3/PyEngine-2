@@ -6,7 +6,7 @@ import pygame.locals as const
 
 
 class Button(Widget):
-    def __init__(self, x, y, text, command, font=Font(), size=Vec2(100, 40),
+    def __init__(self, x, y, text, command=None, font=Font(), size=Vec2(100, 40),
                  background=Color.from_name("GRAY").darker(5)):
         """
             Create Button
@@ -59,7 +59,7 @@ class Button(Widget):
         """
         if self.showed and self.active:
             if evt.type == const.MOUSEBUTTONDOWN and evt.button == const.BUTTON_LEFT:
-                if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
+                if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]) and self.command:
                     self.command()
             elif evt.type == const.MOUSEMOTION:
                 if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
