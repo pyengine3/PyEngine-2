@@ -30,6 +30,8 @@ class Window:
         self.update_rate = update_rate
         self.debug = debug
         self.color = color
+        self.width = width
+        self.height = height
         self.limit_fps = limit_fps
 
         if icon is not None:
