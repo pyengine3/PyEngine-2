@@ -1,13 +1,14 @@
 from pyengine2.Components.Component import Component
 from pyengine2.Components.PositionComponent import PositionComponent
 from pyengine2.Components.CollisionComponent import CollisionComponent
+from pyengine2.Components.PhysicsComponent import PhysicsComponent
 from pyengine2.Utils import logger
 
 import pygame.locals as const
 
 
 class ControlComponent(Component):
-    types = ["FOURDIRECTION", "UPDOWN", "LEFTRIGHT"]
+    types = ["FOURDIRECTION", "UPDOWN", "LEFTRIGHT", "CLASSICJUMP"]
 
     def __init__(self, control_type, speed=5):
         """
@@ -16,7 +17,7 @@ class ControlComponent(Component):
             This Component is here to make player control entity
             Required Components : PositionComponent
 
-            :param control_type: Type of control ("FOURDIRECTION", "UPDOWN", "LEFTRIGHT")
+            :param control_type: Type of control ("FOURDIRECTION", "UPDOWN", "LEFTRIGHT", "CLASSICJUMP")
             :param speed: Speed of movement
         """
         super(ControlComponent, self).__init__()
@@ -34,8 +35,11 @@ class ControlComponent(Component):
         }
 
         self.keypressed = set()
+        self.jumping = False
 
         self.required_components.add(PositionComponent)
+        if self.control_type == "CLASSICJUMP":
+            self.required_components.add(PhysicsComponent)
 
     def update(self):
         """
@@ -58,16 +62,22 @@ class ControlComponent(Component):
             if self.control_type in ("FOURDIRECTION", "DOWNUP"):
                 pos.y -= self.speed
                 cause = "UPCONTROL"
+            elif self.control_type == "CLASSICJUMP":
+                phys = self.entity.get_component(PhysicsComponent)
+                if phys.grounded and not self.jumping:
+                    phys.grounded = False
+                    self.jumping = True
+                    phys.gravity = -phys.max_gravity
         elif key == self.controls["DOWN"]:
             if self.control_type in ("FOURDIRECTION", "DOWNUP"):
                 pos.y += self.speed
                 cause = "DOWNCONTROL"
         elif key == self.controls["RIGHT"]:
-            if self.control_type in ("FOURDIRECTION", "LEFTRIGHT"):
+            if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
                 pos.x += self.speed
                 cause = "RIGHTCONTROL"
         elif key == self.controls["LEFT"]:
-            if self.control_type in ("FOURDIRECTION", "LEFTRIGHT"):
+            if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
                 pos.x -= self.speed
                 cause = "LEFTCONTROL"
 
@@ -86,6 +96,8 @@ class ControlComponent(Component):
         """
         if evt.key in self.keypressed:
             self.keypressed.remove(evt.key)
+        if self.control_type == "CLASSICJUMP" and evt.key == self.controls["UPJUMP"]:
+            self.jumping = False
 
     def keypress(self, evt):
         """
