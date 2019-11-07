@@ -7,7 +7,7 @@ import os
 
 
 def collision(other_entity, cause):
-    print("COLLISION :\n  - Entity :", other_entity.identity, "\n  - Cause :", cause)
+    pass
 
 
 images = [os.path.join(os.path.dirname(__file__), "sprite0.png")]
@@ -22,11 +22,12 @@ e.add_component(PositionComponent(100, 100))
 e.add_component(SpriteComponent(images[0], size=Vec2(78, 50)))
 e.add_component(ShowComponent())
 e.add_component(CollisionComponent(collision))
-e.add_component(ControlComponent("FOURDIRECTION"))
+e.add_component(PhysicsComponent())
+e.add_component(ControlComponent("CLASSICJUMP"))
 
 e2 = Entity()
 
-e2.add_component(PositionComponent(500, 300))
+e2.add_component(PositionComponent(100, 300))
 e2.add_component(SpriteComponent(images[0], size=Vec2(78, 50)))
 e2.add_component(ShowComponent())
 e2.add_component(CollisionComponent())
