@@ -1,4 +1,7 @@
 from pyengine2.Components.ShowComponent import ShowComponent
+from pyengine2.Components.PositionComponent import PositionComponent
+from pyengine2.Components.SpriteComponent import SpriteComponent
+from pyengine2.Components.TextComponent import TextComponent
 from pyengine2.Utils import logger, Font, Color
 
 
@@ -70,6 +73,18 @@ class EntitySystem:
         """
         for i in self.entities:
             i.update()
+
+            if i.has_component(PositionComponent) and i.has_component(ShowComponent):
+                position = i.get_component(PositionComponent).position()
+                if i.get_component(ShowComponent).use_sprite:
+                    image = i.get_component(SpriteComponent).transformed_image
+                else:
+                    image = i.get_component(TextComponent).render
+                height = image.get_rect().height
+                width = image.get_rect().width
+                if position.x < 0 or position.y < 0 or position.x > self.world.window.width - width or \
+                        position.y > self.world.window.height - height:
+                    self.world.window.call("OUTOFWINDOW", i, position)
 
     def show(self, screen):
         """

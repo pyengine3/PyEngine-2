@@ -53,6 +53,8 @@ class Window:
         self.music_system = MusicSystem()
         self.sound_system = SoundSystem()
 
+        self.callbacks = {"START": None, "STOP": None, "OUTOFWINDOW": None, "CHANGEWORLD": None}
+
         self.fps_timer = 30
         try:
             self.fps_label = self.debug_font.render("FPS : " + str(round(self.clock.get_fps())))
@@ -65,20 +67,47 @@ class Window:
         else:
             logger.setLevel(logging.INFO)
 
+    def set_callback(self, callback, function):
+        """
+            Set callback of Window
+
+            :param callback: Callback to set
+            :param function: Function which is triggered by the callback
+        """
+        if callback in self.callbacks.keys():
+            self.callbacks[callback] = function
+        else:
+            logger.warning("The callback '{}' doesn't exist.", callback)
+
+    def call(self, callback, *param):
+        """
+            Call a callback
+
+            :param callback: Callback to call
+            :param param: Parameters of callback
+
+            .. note:: You may not use this method. Window and EntitySystem make it for you
+        """
+        if callback in self.callbacks.keys() and self.callbacks[callback] is not None:
+            self.callbacks[callback](*param)
+
     def stop(self):
         """Stop Window"""
-        logger.debug("Stop Window")
         self.is_running = False
+        self.call("STOP")
+        logger.debug("Stop Window")
 
     def run(self):
         """Run Window"""
         self.is_running = True
+        self.call("START")
         logger.debug("Start Window")
         while self.is_running:
             for event in pygame.event.get():
                 self.process_event(event)
 
             if self.old_world != self.world:
+                self.call("CHANGEWORLD", self.old_world, self.world)
                 self.screen.fill(self.color.get_rgba())
                 self.old_world = self.world
 
