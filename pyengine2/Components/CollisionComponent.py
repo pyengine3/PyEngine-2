@@ -4,7 +4,7 @@ from pyengine2.Components.PositionComponent import PositionComponent
 
 
 class CollisionComponent(Component):
-    causes = ["UNKNOWN", "LEFTCONTROL", "RIGHTCONTROL", "UPCONTROL", "DOWNCONTROL", "AUTOCOMPONENT"]
+    causes = ["UNKNOWN", "LEFTCONTROL", "RIGHTCONTROL", "UPCONTROL", "DOWNCONTROL", "AUTOCOMPONENT", "GRAVITY"]
 
     def __init__(self, callback=None, solid=True):
         """
