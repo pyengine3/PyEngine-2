@@ -38,10 +38,10 @@ class Button(Widget):
             .. note:: You must use this method after any change in Button
         """
         if isinstance(self.background, Color):
-            self.render = pygame.Surface(self.size.coords())
+            self.render = pygame.Surface(self.size.coords(), pygame.SRCALPHA, 32).convert_alpha()
             self.render.fill(self.background.get_rgba())
         else:
-            self.render = pygame.image.load(self.background)
+            self.render = pygame.image.load(self.background).convert()
             self.render = pygame.transform.scale(self.render, self.size.coords())
 
         text_render = self.font.render(self.text)

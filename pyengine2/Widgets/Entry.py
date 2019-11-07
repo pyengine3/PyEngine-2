@@ -115,7 +115,7 @@ class Entry(Widget):
             self.render = pygame.image.load(self.image).convert()
             self.render = pygame.transform.scale(self.image, (self.width, 35))
         else:
-            self.render = pygame.Surface((self.width, 35))
+            self.render = pygame.Surface((self.width, 35), pygame.SRCALPHA, 32).convert_alpha()
             self.render.fill((50, 50, 50))
             white = pygame.Surface((self.width - 8, 35))
             white.fill((255, 255, 255))

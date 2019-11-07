@@ -15,6 +15,7 @@ class SpriteComponent(Component):
             :param sprite: Path to file of sprite
         """
         super(SpriteComponent, self).__init__()
+        self.sprite = sprite
         self.image = pygame.image.load(sprite).convert()
         if size is None:
             size = Vec2(self.image.get_rect().width, self.image.get_rect().height)
@@ -31,6 +32,7 @@ class SpriteComponent(Component):
 
             .. note:: You must use this method after any change of the component
         """
+        self.image = pygame.image.load(self.sprite).convert()
         image = pygame.transform.flip(self.image, self.flipx, self.flipy)
         image = pygame.transform.scale(image, self.size.coords())
         image = pygame.transform.rotate(image, self.rotation)

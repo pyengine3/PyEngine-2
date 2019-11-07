@@ -30,7 +30,7 @@ class Image(Widget):
 
             .. note:: You must use this method after any change in Image
         """
-        self.render = pygame.image.load(self.sprite)
+        self.render = pygame.image.load(self.sprite).convert()
         if self.size is not None:
             self.render = pygame.transform.scale(self.render, self.size.coords())
 
