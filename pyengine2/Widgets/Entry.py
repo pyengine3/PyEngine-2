@@ -104,7 +104,7 @@ class Entry(Widget):
         else:
             self.render = pygame.Surface((self.width, 35), pygame.SRCALPHA, 32).convert_alpha()
             self.render.fill((50, 50, 50))
-            white = pygame.Surface((self.width - 8, 35))
+            white = pygame.Surface((self.width - 8, 27))
             white.fill((255, 255, 255))
             self.render.blit(white, (4, 4))
         if len(self.text) or self.cursor:
