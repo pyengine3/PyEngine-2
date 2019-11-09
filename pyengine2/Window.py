@@ -29,6 +29,7 @@ class Window:
         """
         self.update_rate = update_rate
         self.debug = debug
+        self.old_debug = debug
         self.color = color
         self.width = width
         self.height = height
@@ -110,6 +111,10 @@ class Window:
                 self.call("CHANGEWORLD", self.old_world, self.world)
                 self.screen.fill(self.color.get_rgba())
                 self.old_world = self.world
+
+            if self.old_debug != self.debug:
+                self.screen.fill(self.color.get_rgba())
+                self.old_debug = self.debug
 
             self.world.dirty_rects = []
             self.world.show(self.screen)
