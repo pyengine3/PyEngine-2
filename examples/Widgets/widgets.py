@@ -32,6 +32,7 @@ en = Entry(100, 300, font=Font(size=18, color=Color.from_name("BLACK")))
 select = Selector(200, 100, "Ceci", "est", "un", "test", "!", "SELECTOR !")
 pro1 = ProgressBar(400, 100)
 pro2 = ProgressBar(400, 200, ("sprite0.png", "sprite1.png"), value=34)
+con = Console(50, 400, game, 650)
 
 e = Entity()
 
@@ -48,6 +49,7 @@ game.world.ui_system.add_widget(en)
 game.world.ui_system.add_widget(select)
 game.world.ui_system.add_widget(pro1)
 game.world.ui_system.add_widget(pro2)
+game.world.ui_system.add_widget(con)
 game.world.entity_system.add_entity(e)
 
 game.run()
