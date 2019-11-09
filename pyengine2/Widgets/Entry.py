@@ -1,9 +1,8 @@
 from pyengine2.Widgets.Widget import Widget
-from pyengine2.Utils import Font, clamp, Color
+from pyengine2.Utils import Font, clamp, Color, get_clipboard, set_clipboard
 
 import string
 import pygame
-pygame.scrap.init()
 import pygame.locals as const
 
 
@@ -77,13 +76,6 @@ class Entry(Widget):
             if len(self.text):
                 self.text = self.text[:-1]
                 self.update_render()
-        elif key == const.K_v and (mod == const.KMOD_CTRL or mod == const.KMOD_LCTRL):
-            clipboard = pygame.scrap.get(const.SCRAP_TEXT)
-            if clipboard:
-                self.text += clipboard.decode()[:-1]
-                self.update_render()
-        elif key == const.K_c and (mod == const.KMOD_CTRL or mod == const.KMOD_LCTRL):
-            pygame.scrap.put(pygame.SCRAP_TEXT, self.text.encode())
         elif len(pygame.key.name(key)) == 1 or key in self.otherkeys.keys():
             if mod == const.KMOD_CAPS or mod == const.KMOD_LSHIFT or mod == const.KMOD_RSHIFT or \
                     mod == const.KMOD_SHIFT:
@@ -96,7 +88,11 @@ class Entry(Widget):
                     self.text += pygame.key.name(key)
                 else:
                     self.text += self.otherkeys[key][0]
+        elif key == const.K_v and (mod == const.KMOD_RCTRL or mod == const.KMOD_LCTRL):
+            self.text += get_clipboard()
             self.update_render()
+        elif key == const.K_c and (mod == const.KMOD_RCTRL or mod == const.KMOD_LCTRL):
+            set_clipboard(self.text)
 
     def update_render(self):
         """
