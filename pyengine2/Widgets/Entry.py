@@ -7,8 +7,6 @@ import pygame.locals as const
 
 
 class Entry(Widget):
-    otherkeys = {const.K_SPACE: [" ", " "]}
-
     def __init__(self, x, y, width=200, font=Font(color=Color.from_name("BLACK")),
                  accepted="éèàçù€ " + string.digits + string.ascii_letters + string.punctuation, image=None):
         """
@@ -55,6 +53,10 @@ class Entry(Widget):
         if self.showed and self.active:
             if evt.type == const.KEYDOWN and self.focus:
                 self.keypress(evt.key, evt.mod)
+            elif evt.type == const.TEXTINPUT and self.focus:
+                if evt.text in self.accepted:
+                    self.text += evt.text
+                    self.update_render()
             elif evt.type == const.MOUSEBUTTONDOWN and evt.button == const.BUTTON_LEFT:
                 if self.render.get_rect(x=self.x, y=self.y).collidepoint(evt.pos[0], evt.pos[1]):
                     self.focus = True
@@ -67,7 +69,8 @@ class Entry(Widget):
         """
             Manage KEYDOWN Event
 
-            :param evt: Event
+            :param key: Key Pressed
+            :param mod: Modifier of Key
 
             .. note:: You may not use this method. Entry make it for you
         """
@@ -76,18 +79,6 @@ class Entry(Widget):
             if len(self.text):
                 self.text = self.text[:-1]
                 self.update_render()
-        elif len(pygame.key.name(key)) == 1 or key in self.otherkeys.keys():
-            if mod == const.KMOD_CAPS or mod == const.KMOD_LSHIFT or mod == const.KMOD_RSHIFT or \
-                    mod == const.KMOD_SHIFT:
-                if len(pygame.key.name(key)) == 1:
-                    self.text += pygame.key.name(key).upper()
-                else:
-                    self.text += self.otherkeys[key][1]
-            else:
-                if len(pygame.key.name(key)) == 1:
-                    self.text += pygame.key.name(key)
-                else:
-                    self.text += self.otherkeys[key][0]
         elif key == const.K_v and (mod == const.KMOD_RCTRL or mod == const.KMOD_LCTRL):
             self.text += get_clipboard()
             self.update_render()
