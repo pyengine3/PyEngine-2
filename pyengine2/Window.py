@@ -150,8 +150,8 @@ class Window:
         if evt.type == const.QUIT:
             self.stop()
         elif evt.type == const.USEREVENT:
+            self.world.update()
             if self.debug:
-                self.world.update()
                 self.fps_timer -= 1
                 if self.fps_timer <= 0:
                     try:
