@@ -32,6 +32,10 @@ class Entity:
                 if i not in set(type(c) for c in self.components):
                     logger.warning(str(component.__class__.__name__) + " require " + str(i.__name__))
                     return
+            for i in component.incompatible_components:
+                if i in set(type(c) for c in self.components):
+                    logger.warning(str(component.__class__.__name__) + " is incompatible with " + str(i.__name__))
+                    return
             component.entity = self
             self.components.add(component)
             return component

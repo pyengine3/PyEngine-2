@@ -2,6 +2,7 @@ from pyengine2.Components.Component import Component
 from pyengine2.Components.SpriteComponent import SpriteComponent
 from pyengine2.Components.PositionComponent import PositionComponent
 from pyengine2.Components.TextComponent import TextComponent
+from pyengine2.Components.ShapeComponent import ShapeComponent
 
 
 class ShowComponent(Component):
@@ -9,10 +10,12 @@ class ShowComponent(Component):
         """
             Create ShowComponent
 
-            This Component is here to add showing of entity
+            This Component is here to add complex showing of entity
             Required Components : PositionComponent, (SpriteComponent or TextComponent)
+            Incompatible Component : ShapeComponent
         """
         super(ShowComponent, self).__init__()
+        self.incompatible_components.add(ShapeComponent)
         self.required_components.add(PositionComponent)
         if use_sprite:
             self.required_components.add(SpriteComponent)
