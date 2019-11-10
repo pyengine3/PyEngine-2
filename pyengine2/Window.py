@@ -116,11 +116,12 @@ class Window:
                 self.screen.fill(self.color.get_rgba())
                 self.old_debug = self.debug
 
-            self.world.dirty_rects = []
-            self.world.show(self.screen)
+            rects = self.world.show(self.screen)
 
             if self.debug:
-                self.world.show_debug(self.screen)
+                rects_debug = self.world.show_debug(self.screen)
+                if len(rects_debug):
+                    rects += rects_debug
                 if self.old_fps != self.fps_label and self.old_fps is not None:
                     self.screen.fill(self.color.get_rgba(), self.old_fps.get_rect(x=10, y=10))
                 self.screen.blit(self.fps_label, (10, 10))
@@ -132,10 +133,9 @@ class Window:
 
             if self.debug and self.old_fps != self.fps_label:
                 self.old_fps = self.fps_label
-                pygame.display.update(self.fps_label.get_rect(x=10, y=10))
+                rects.append(self.fps_label.get_rect(x=10, y=10))
 
-            for dirty_rect in self.world.dirty_rects:
-                pygame.display.update(tuple(dirty_rect))
+            pygame.display.update(rects)
 
         pygame.quit()
 

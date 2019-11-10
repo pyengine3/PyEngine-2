@@ -95,11 +95,11 @@ class EntitySystem:
 
             .. note:: You may not use this method. World it this for you.
         """
+        rects = []
         for entity in self.entities:
             if entity.has_component(ShowComponent):
-                rect = entity.get_component(ShowComponent).show(screen)
-                for i in rect:
-                    yield i
+                rects += entity.get_component(ShowComponent).show(screen)
+        return rects
 
     def show_debug(self, screen):
         """
@@ -110,8 +110,8 @@ class EntitySystem:
 
             .. note:: You may not use this method. World it this for you.
         """
+        rects = []
         for entity in self.entities:
             if entity.has_component(ShowComponent):
-                rect = entity.get_component(ShowComponent).show_debug(screen)
-                for i in rect:
-                    yield i
+                rects += entity.get_component(ShowComponent).show_debug(screen)
+        return rects

@@ -32,6 +32,7 @@ class ShowComponent(Component):
 
             .. note:: You may not use this method. EntitySystem make it for you
         """
+        rects = []
         pos = self.entity.get_component(PositionComponent).position()
         if self.use_sprite:
             image = self.entity.get_component(SpriteComponent).transformed_image
@@ -39,23 +40,15 @@ class ShowComponent(Component):
             image = self.entity.get_component(TextComponent).render
         if self.old_pos != pos or self.old_image != image:
             if self.old_pos is not None and self.old_image is not None:
-                dirty_rect = self.old_image.get_rect(x=self.old_pos.x, y=self.old_pos.y)
-                screen.fill(self.entity.system.world.window.color.get_rgba(), dirty_rect)
-            else:
-                dirty_rect = None
+                rect = self.old_image.get_rect(x=self.old_pos.x, y=self.old_pos.y)
+                rects.append(rect)
+                screen.fill(self.entity.system.world.window.color.get_rgba(), rect)
             self.old_pos = pos
             self.old_image = image
-            image_rect = True
-        else:
-            dirty_rect = None
-            image_rect = False
+            rects.append(image.get_rect(x=pos.x, y=pos.y))
 
         screen.blit(image, pos.coords())
-
-        if dirty_rect:
-            yield dirty_rect
-        if image_rect:
-            yield image.get_rect(x=pos.x, y=pos.y)
+        return rects
 
     def show_debug(self, screen):
         """
@@ -66,24 +59,17 @@ class ShowComponent(Component):
 
             .. note:: You may not use this method. EntitySystem make it for you
         """
+        rects = []
         pos = self.entity.get_component(PositionComponent).position()
         image = self.entity.system.debug_font.render("ID : "+str(self.entity.identity))
         if self.old_debug_pos != pos:
             if self.old_debug_pos is not None:
-                dirty_rect = image.get_rect(x=self.old_debug_pos.x, y=self.old_debug_pos.y - 20)
-                screen.fill(self.entity.system.world.window.color.get_rgba(), dirty_rect)
-            else:
-                dirty_rect = None
+                rect = image.get_rect(x=self.old_debug_pos.x, y=self.old_debug_pos.y - 20)
+                rects.append(rect)
+                screen.fill(self.entity.system.world.window.color.get_rgba(), rect)
             self.old_debug_pos = pos
-            image_rect = True
-        else:
-            dirty_rect = None
-            image_rect = False
+            rects.append(image.get_rect(x=pos.x, y=pos.y-20))
 
         screen.blit(image, (pos.x, pos.y - 20))
-
-        if dirty_rect:
-            yield dirty_rect
-        if image_rect:
-            yield image.get_rect(x=pos.x, y=pos.y-20)
+        return rects
 

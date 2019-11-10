@@ -79,10 +79,10 @@ class UISystem:
 
             .. note:: You may not use this method. World it this for you.
         """
+        rects = []
         for widget in self.widgets:
-            rect = widget.show(screen)
-            for i in rect:
-                yield i
+            rects += widget.show(screen)
+        return rects
 
     def show_debug(self, screen):
         """
@@ -93,7 +93,7 @@ class UISystem:
 
             .. note:: You may not use this method. World it this for you.
         """
+        rects = []
         for widget in self.widgets:
-            rect = widget.show_debug(screen)
-            for i in rect:
-                yield i
+            rects += widget.show_debug(screen)
+        return rects
