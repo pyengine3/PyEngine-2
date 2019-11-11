@@ -42,7 +42,7 @@ class ShowComponent(Component):
         else:
             image = self.entity.get_component(TextComponent).render
         if self.old_pos != pos or self.old_image != image:
-            if self.old_pos is not None and self.old_image is not None:
+            if self.old_pos is not None:
                 rect = self.old_image.get_rect(x=self.old_pos.x, y=self.old_pos.y)
                 rects.append(rect)
                 screen.fill(self.entity.system.world.window.color.get_rgba(), rect)

@@ -1,6 +1,6 @@
 from pyengine2 import Window
 from pyengine2.Entities import Entity
-from pyengine2.Components import PositionComponent, SpriteComponent, ShowComponent, AnimComponent
+from pyengine2.Components import PositionComponent, SpriteComponent, ShowComponent, AnimListComponent
 
 
 game = Window(200, 200, debug=True)
@@ -8,7 +8,7 @@ game = Window(200, 200, debug=True)
 e = Entity()
 e.add_component(PositionComponent(100, 100))
 e.add_component(SpriteComponent("sprite0.png"))
-e.add_component(AnimComponent(20, "sprite0.png", "sprite1.png"))
+e.add_component(AnimListComponent("sprite0.png", "sprite1.png"))
 e.add_component(ShowComponent())
 
 game.world.entity_system.add_entity(e)

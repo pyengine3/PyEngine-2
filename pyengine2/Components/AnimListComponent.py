@@ -4,18 +4,18 @@ from pyengine2.Components.SpriteComponent import SpriteComponent
 import pygame
 
 
-class AnimComponent(Component):
-    def __init__(self, time, *images):
+class AnimListComponent(Component):
+    def __init__(self, *images, time=30):
         """
-            Create AnimComponent
+            Create AnimListComponent
 
             This Component is here to create animation for entity
             Required Components : SpriteComponent
 
-            :param time: Time in number of update between changement of sprite
             :param images: Path to sprites
+            :param time: Time in number of update between changement of sprite
         """
-        super(AnimComponent, self).__init__()
+        super(AnimListComponent, self).__init__()
 
         self.required_components.add(SpriteComponent)
         self.images = images
