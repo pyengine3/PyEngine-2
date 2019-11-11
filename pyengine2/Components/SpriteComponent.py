@@ -24,6 +24,7 @@ class SpriteComponent(Component):
         self.flipx = flipx
         self.flipy = flipy
         self.transformed_image = None
+        self.old_sprite = sprite
         self.update_image()
 
     def update_image(self):
@@ -32,7 +33,9 @@ class SpriteComponent(Component):
 
             .. note:: You must use this method after any change of the component
         """
-        self.image = pygame.image.load(self.sprite).convert()
+        if self.old_sprite != self.sprite:
+            self.image = pygame.image.load(self.sprite).convert()
+            self.old_sprite = self.sprite
         image = pygame.transform.flip(self.image, self.flipx, self.flipy)
         image = pygame.transform.scale(image, self.size.coords())
         image = pygame.transform.rotate(image, self.rotation)
