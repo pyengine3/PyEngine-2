@@ -2,6 +2,7 @@ from pyengine2.Utils import logger
 from pyengine2.Components.ControlComponent import ControlComponent
 from pyengine2.Components.AutoComponent import AutoComponent
 from pyengine2.Components.AnimListComponent import AnimListComponent
+from pyengine2.Components.AnimSheetComponent import AnimSheetComponent
 from pyengine2.Components.PhysicsComponent import PhysicsComponent
 
 import pygame.locals as const
@@ -105,5 +106,7 @@ class Entity:
             self.get_component(AutoComponent).update()
         if self.has_component(AnimListComponent):
             self.get_component(AnimListComponent).update()
+        if self.has_component(AnimSheetComponent):
+            self.get_component(AnimSheetComponent).update()
         if self.has_component(PhysicsComponent):
             self.get_component(PhysicsComponent).update()

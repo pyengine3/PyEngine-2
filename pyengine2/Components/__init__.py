@@ -8,4 +8,6 @@ from pyengine2.Components.CollisionComponent import CollisionComponent
 from pyengine2.Components.AnimListComponent import AnimListComponent
 from pyengine2.Components.PhysicsComponent import PhysicsComponent
 from pyengine2.Components.ShapeComponent import ShapeComponent
+from pyengine2.Components.AnimSheetComponent import AnimSheetComponent
+
 
