@@ -16,7 +16,7 @@ rect.add_component(ShapeComponent(Rect(200, 200, color=Color.from_name("RED"), f
 
 poly = Entity()
 poly.add_component(PositionComponent(290, 30))
-poly.add_component(ShapeComponent(Polygon(Vec2(290, 30), Vec2(490, 30), Vec2(290, 230), color=Color.from_name("BLUE"))))
+poly.add_component(ShapeComponent(Polygon(Vec2(200, -20), Vec2(80, 50), Vec2(50, 100), color=Color.from_name("BLUE"))))
 
 circle = Entity()
 circle.add_component(PositionComponent(650, 150))
@@ -28,7 +28,7 @@ ellipse.add_component(ShapeComponent(Ellipse(89, 150, color=Color.from_name("GRE
 
 arc = Entity()
 arc.add_component(PositionComponent(290, 280))
-arc.add_component(ShapeComponent(Arc(200, 200, 0, 90, color=Color.from_name("BROWN"), width_line=5)))
+arc.add_component(ShapeComponent(Arc(200, 200, 80, 180, color=Color.from_name("BROWN"), width_line=5)))
 
 line = Entity()
 line.add_component(PositionComponent(550, 280))

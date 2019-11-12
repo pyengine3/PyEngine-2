@@ -1,5 +1,6 @@
 from pyengine2.Utils.Logger import logger
 from pyengine2.Utils.Color import Color
+from pyengine2.Utils.Vec2 import Vec2
 import math
 import pygame
 
@@ -23,11 +24,11 @@ class Polygon:
         self.points = points
         self.color = color
         self.full = full
-        if len(self.points) < 3:
+        if len(self.points) < 2:
             logger.warning("Polygon have less than 3 points.")
 
     def show(self, x, y, screen):
-        points = tuple(i.coords() for i in self.points)
+        points = ((x, y), *tuple((i + Vec2(x, y)).coords() for i in self.points))
         if self.full:
             return pygame.draw.polygon(screen, self.color.get_rgba(), points)
         else:
