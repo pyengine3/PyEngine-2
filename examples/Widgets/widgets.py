@@ -8,7 +8,7 @@ import os
 
 
 def label_management():
-    l.showed = not l.showed
+    label.showed = not label.showed
     c.active = not c.active
     pro1.value += 10
     if pro1.value > 100:

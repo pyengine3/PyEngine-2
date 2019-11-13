@@ -13,14 +13,14 @@ def change_lang():
     if not english:
         b.text = "Francais"
         b.update_render()
-        l.text = en.get_translate("accueil", "Welcome {}", nbclick)
-        l.update_render()
+        bienvenue.text = en.get_translate("accueil", "Welcome {}", nbclick)
+        bienvenue.update_render()
         english = True
     else:
         b.text = "English"
         b.update_render()
-        l.text = fr.get_translate("accueil", "Welcome {}", nbclick)
-        l.update_render()
+        bienvenue.text = fr.get_translate("accueil", "Welcome {}", nbclick)
+        bienvenue.update_render()
         english = False
 
 

@@ -1,6 +1,7 @@
 from pyengine2 import Window
 from pyengine2.Entities import Entity
-from pyengine2.Components import PositionComponent, SpriteComponent, ShowComponent, CollisionComponent, ControlComponent
+from pyengine2.Components import PositionComponent, SpriteComponent, ShowComponent, CollisionComponent, \
+    ControlComponent, PhysicsComponent
 from pyengine2.Utils import Vec2
 
 import os
