@@ -196,4 +196,3 @@ class Console(Widget):
             self.commands[command](self, self.window, args)
         else:
             logger.warning("Unknown command : " + command)
-

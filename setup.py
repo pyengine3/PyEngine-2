@@ -12,7 +12,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=open("README.md").read(),
 
-    include_package_data = True,
+    include_package_data=True,
 
     url="http://github.com/pyengine-2D/PyEngine-2",
 

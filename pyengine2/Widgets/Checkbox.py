@@ -1,5 +1,5 @@
 from pyengine2.Widgets.Widget import Widget
-from pyengine2.Utils import Vec2, Font
+from pyengine2.Utils import Font
 
 import pygame
 import pygame.locals as const

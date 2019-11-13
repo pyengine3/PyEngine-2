@@ -68,7 +68,7 @@ class Arc(Rect):
 
     def show(self, x, y, screen):
         return pygame.draw.arc(screen, self.color.get_rgba(), pygame.Rect(x, y, self.width, self.height),
-                                   self.start_angle, self.stop_angle, self.width_line)
+                               self.start_angle, self.stop_angle, self.width_line)
 
 
 class Line:

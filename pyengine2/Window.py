@@ -1,5 +1,4 @@
 import pygame
-pygame.init()
 
 import pygame.locals as const
 
@@ -9,6 +8,8 @@ from pyengine2.Utils import Color, Font, logger
 from pyengine2.World import World
 from pyengine2.WindowSystems import MusicSystem, SoundSystem
 import logging
+
+pygame.init()
 
 
 class Window:

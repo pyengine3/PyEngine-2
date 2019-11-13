@@ -1,5 +1,4 @@
 from pyengine2.Widgets.Widget import Widget
-from pyengine2.Utils import Vec2
 
 import pygame
 
@@ -33,5 +32,3 @@ class Image(Widget):
         self.render = pygame.image.load(self.sprite).convert()
         if self.size is not None:
             self.render = pygame.transform.scale(self.render, self.size.coords())
-
-

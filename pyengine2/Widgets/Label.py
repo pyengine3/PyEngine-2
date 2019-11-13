@@ -1,5 +1,5 @@
 from pyengine2.Widgets.Widget import Widget
-from pyengine2.Utils import Font, logger, Vec2
+from pyengine2.Utils import Font, logger
 
 
 class Label(Widget):

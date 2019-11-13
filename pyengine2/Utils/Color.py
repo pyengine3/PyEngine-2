@@ -174,5 +174,3 @@ class Color:
             "ORANGE": (255, 128, 0)
         }
         return Color.from_rgb(*colors[name])
-
-

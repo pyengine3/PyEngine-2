@@ -77,4 +77,3 @@ class MusicSystem:
     def unpause():
         """Unpause music"""
         pygame.mixer.music.unpause()
-

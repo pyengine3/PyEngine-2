@@ -1,7 +1,8 @@
 import pygame
-pygame.font.init()
 
 from pyengine2.Utils.Color import Color
+
+pygame.font.init()
 
 
 class Font:

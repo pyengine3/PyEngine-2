@@ -75,4 +75,3 @@ class ShowComponent(Component):
 
         screen.blit(image, (pos.x, pos.y - 20))
         return rects
-

@@ -1,7 +1,7 @@
 from pyengine2 import Window
 from pyengine2.Entities import Entity
-from pyengine2.Components import PositionComponent, ShapeComponent, ControlComponent
-from pyengine2.Utils.Shapes import *
+from pyengine2.Components import PositionComponent, ShapeComponent
+from pyengine2.Utils.Shapes import Rect, Polygon, Circle, Ellipse, Arc, Line
 from pyengine2.Utils import Vec2, Color
 
 import os

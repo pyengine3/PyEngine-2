@@ -47,4 +47,3 @@ class AutoComponent(Component):
         if self.rotation != 0:
             self.entity.get_component(SpriteComponent).rotation += self.rotation
             self.entity.get_component(SpriteComponent).update_image()
-

@@ -89,5 +89,3 @@ class AnimComponent(Component):
                 self.timer = self.time
 
             self.timer -= 1
-
-

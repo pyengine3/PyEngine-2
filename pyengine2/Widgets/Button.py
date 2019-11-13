@@ -85,7 +85,3 @@ class Button(Widget):
                     except ValueError:
                         pass
                     self.ishover = False
-
-
-
-

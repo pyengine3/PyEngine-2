@@ -87,6 +87,3 @@ class Selector(Widget):
                 else:
                     self.current += 1
                 self.update_render()
-
-
-

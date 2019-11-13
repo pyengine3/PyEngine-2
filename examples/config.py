@@ -17,8 +17,8 @@ if not config.created:
     }
     config.create(dic)
 
-l = Label(100, 100, config.get("label.text", "Bonjour"), Font(color=Color.from_name(config.get("label.color", "RED"))))
+text = Label(100, 100, config.get("label.text", "Bonjour"), Font(color=Color.from_name(config.get("label.color", "RED"))))
 
-window.world.ui_system.add_widget(l)
+window.world.ui_system.add_widget(text)
 
 window.run()

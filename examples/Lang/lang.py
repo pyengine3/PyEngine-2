@@ -30,10 +30,10 @@ fr = Lang(os.path.join(os.path.dirname(__file__), "fr.lang"))
 
 english = False
 nbclick = 0
-l = Label(100, 100, fr.get_translate("accueil", "Welcome {}", nbclick))
+bienvenue = Label(100, 100, fr.get_translate("accueil", "Welcome {}", nbclick))
 b = Button(200, 200, "English", change_lang)
 
-window.world.ui_system.add_widget(l)
+window.world.ui_system.add_widget(bienvenue)
 window.world.ui_system.add_widget(b)
 
 window.run()
