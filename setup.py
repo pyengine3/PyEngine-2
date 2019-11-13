@@ -26,5 +26,5 @@ setup(
         "Topic :: Software Development :: Libraries :: pygame",
         "Intended Audience :: Developers",
     ],
-    install_requires=['pygame==2.0.0.dev4'],
+    install_requires=['pygame==2.0.0.dev6'],
 )
