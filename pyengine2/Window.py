@@ -93,6 +93,13 @@ class Window:
         if callback in self.callbacks.keys() and self.callbacks[callback] is not None:
             self.callbacks[callback](*param)
 
+    def screenshot(self, pos=(0, 0), size=None, path="screenshot.jpg"):
+        if size is None:
+            size = (self.width-pos[0], self.height-pos[1])
+        rect = pygame.Rect(pos, size)
+        sub = self.screen.subsurface(rect)
+        pygame.image.save(sub, path)
+
     def stop(self):
         """Stop Window"""
         self.is_running = False
